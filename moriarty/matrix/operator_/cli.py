@@ -64,6 +64,10 @@ async def bridge():
 
 @click.command()
 def init():
+    """
+    Init and upgrade the database.
+    """
+
     config = get_config()
 
     upgrade_in_place(

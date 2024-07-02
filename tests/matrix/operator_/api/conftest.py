@@ -13,6 +13,7 @@ from moriarty.matrix.operator_.cli import drop
 from moriarty.matrix.operator_.spawner.manager import (
     SpawnerManager,
     get_spawner_manager,
+    get_spawner_name,
 )
 
 
@@ -38,7 +39,10 @@ async def app(pg_port, redis_port, monkeypatch):
     redis_client = redis.Redis(host="localhost", port=redis_port)
     redis_client.flushall()
 
-    APP.dependency_overrides = {get_spawner_manager: lambda: spawner_manager}
+    APP.dependency_overrides = {
+        get_spawner_name: lambda: "mock",
+        get_spawner_manager: lambda: spawner_manager,
+    }
     yield APP
 
 
